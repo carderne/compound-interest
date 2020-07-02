@@ -15,43 +15,41 @@
                     <p>Compound interest is hard to intuit. This applies to interest you owe, growth on investments, and also to fees. Hopefully this chart helps!</p>
                     <p>Enter details of two separate investment options to compare the expected returns far into the future.</p>
                 </div>
-                <div class="warnings">
-                    <p><strong>Comparison</strong></p>
-                    <p>final value A: <span id="ansA" class="green"></span></p>
-                    <p>final value B: <span id="ansB" class="green"></span></p>
-                    <p>money lost: <span id="ansDiff" class="red"></span></p>
-                </div>
             </div>
             <div class="column">
-                <h1 class="hide-mobile">Compound interest & fees</h1>
-                <div>
-                    <label for="age">Age</label>
-                    <input type="number" placeholder="60" id="age" /> years
-                </div>
+                <div style="margin-top:10px;">
+                    <div>
+                        <label for="age">Age</label>
+                        <input type="number" placeholder="60" id="age" /> years
+                    </div>
 
-                <div>
-                    <label for="endAge">End age</label>
-                    <input type="number" placeholder="100" id="endAge" /> years
-                </div>
+                    <div>
+                        <label for="endAge">End age</label>
+                        <input type="number" placeholder="100" id="endAge" /> years
+                    </div>
 
-                <div>
-                    <label for="lump">Lump sum</label>
-                    <input type="number" placeholder="5" id="lump" /> million
-                </div>
+                    <div>
+                        <label for="lump">Lump sum</label>
+                        <input type="number" placeholder="5" id="lump" /> million
+                    </div>
 
-                <div>
-                    <label for="growth">Annual growth</label>
-                    <input type="number" placeholder="7" id="growth" />%
-                </div>
+                    <div>
+                        <label for="growth">Annual growth</label>
+                        <input type="number" placeholder="7" id="growth" />%
+                    </div>
 
-                <div style="background-color: rgba(57, 162, 174, 0.2);">
-                    <label for="feeA">Fund A fee</label>
-                    <input type="number" placeholder="0.1" id="feeA" />%
-                </div>
+                    <div style="background-color: rgba(57, 162, 174, 0.2)">
+                        <label for="feeA">Fund A fee</label>
+                        <input type="number" placeholder="0.1" id="feeA" />%
+                    </div>
 
-                <div style="background-color: rgba(37, 62, 224, 0.2);">
-                    <label for="feeB">Fund B fee</label>
-                    <input type="number" placeholder="1.6" id="feeB" />%
+                    <div style="background-color: rgba(37, 62, 224, 0.2)">
+                        <label for="feeB">Fund B fee</label>
+                        <input type="number" placeholder="1.6" id="feeB" />%
+                    </div>
+                </div>
+                <div class="warnings">
+                    <p>money lost: <span id="ansDiff" style="color:rgb(140, 0, 0);"></span></p>
                 </div>
             </div>
         </div>

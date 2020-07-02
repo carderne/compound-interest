@@ -9,8 +9,6 @@ const inGrowth = $("growth");
 const inFeeA = $("feeA");
 const inFeeB = $("feeB");
 const ctx = $("canvas").getContext('2d');
-const ansA = $("ansA");
-const ansB = $("ansB");
 const ansDiff = $("ansDiff");
 
 let age = 60;
@@ -35,8 +33,10 @@ function update() {
     let newData = parseForms();
     if (newData != data) {
       data = newData;
-      makeChart(data);
-      updateWarnings(data);
+      if (endAge > age) {
+        makeChart(data);
+        updateWarnings(data);
+      }
     }
   } catch (err) {
     // do nothing
@@ -46,9 +46,7 @@ function update() {
 function updateWarnings(data) {
   maxA = data.a[data.a.length - 1];
   maxB = data.b[data.b.length - 1];
-  ansA.innerHTML = Math.round(maxA) + " million";
-  ansB.innerHTML = Math.round(maxB) + " million";
-  ansDiff.innerHTML = Math.abs(Math.round(maxA - maxB)) + " million";
+  ansDiff.innerHTML = Math.abs(maxA - maxB).toFixed(1) + " million";
 }
 
 

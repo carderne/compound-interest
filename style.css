@@ -6,25 +6,32 @@ html {
 body {
     margin: auto;
     width: 90%;
+    max-width: 900px;
 }
 
-.row {
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.column {
-    flex: 40%;
-    max-width: 500px;
+.forms {
+    width: 400px;
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 800px) {
-    .column {
-        flex: 100%;
+    body {
+        width: 100vw;
+        max-width: 100vw;
+    }
+
+    .intro {
+        padding: 10px;
+    }
+
+    .forms {
+        width: 100vw;
+        max-width: 100vw;
+        margin: initial;
     }
 }
 
-.column > div > div {
+.forms > div {
     margin: 5px;
 }
 
@@ -38,7 +45,7 @@ body {
     background-color: rgb(220,220,220);
     padding: 5px;
     margin: 5px;
-    max-width: 500px;
+    text-align:center;
 }
 
 .warnings p {

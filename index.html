@@ -8,50 +8,39 @@
         <link href="style.css" rel="stylesheet" />
     </head>
     <body>
-        <div class="row">
-            <div class="column">
-                <h1>Compound interest & fees</h1>
-                <div style="padding-right:20px;">
-                    <p>Compound interest is hard to intuit. This applies to interest you owe, growth on investments, and also to fees. Hopefully this chart helps!</p>
-                    <p>Enter details of two separate investment options to compare the expected returns far into the future.</p>
-                </div>
+        <div class="intro">
+            <h1>Compound interest & fees</h1>
+            <p>Compound interest is hard to intuit. This applies to interest you owe, growth on investments, and also to fees. Hopefully this chart helps!</p>
+            <p>Enter details of two separate investment options to compare the expected returns far into the future.</p>
+        </div>
+        <div class="forms">
+            <div>
+                <label for="age">Age</label>
+                <input type="number" placeholder="60" id="age" /> years
             </div>
-            <div class="column">
-                <div style="margin-top:10px;">
-                    <div>
-                        <label for="age">Age</label>
-                        <input type="number" placeholder="60" id="age" /> years
-                    </div>
-
-                    <div>
-                        <label for="endAge">End age</label>
-                        <input type="number" placeholder="100" id="endAge" /> years
-                    </div>
-
-                    <div>
-                        <label for="lump">Lump sum</label>
-                        <input type="number" placeholder="5" id="lump" /> million
-                    </div>
-
-                    <div>
-                        <label for="growth">Annual growth</label>
-                        <input type="number" placeholder="7" id="growth" />%
-                    </div>
-
-                    <div style="background-color: rgba(57, 162, 174, 0.2)">
-                        <label for="feeA">Fund A fee</label>
-                        <input type="number" placeholder="0.1" id="feeA" />%
-                    </div>
-
-                    <div style="background-color: rgba(37, 62, 224, 0.2)">
-                        <label for="feeB">Fund B fee</label>
-                        <input type="number" placeholder="1.6" id="feeB" />%
-                    </div>
-                </div>
-                <div class="warnings">
-                    <p>money lost through higher fees:</p>
-                    <p style="text-align:center;"><strong><span id="ansDiff" style="color:rgb(140, 0, 0);"></span></strong></p>
-                </div>
+            <div>
+                <label for="endAge">End age</label>
+                <input type="number" placeholder="100" id="endAge" /> years
+            </div>
+            <div>
+                <label for="lump">Lump sum</label>
+                <input type="number" placeholder="5" id="lump" /> million
+            </div>
+            <div>
+                <label for="growth">Annual growth</label>
+                <input type="number" placeholder="7" id="growth" />%
+            </div>
+            <div style="background-color: rgba(57, 162, 174, 0.2)">
+                <label for="feeA">Fund A fee</label>
+                <input type="number" placeholder="0.1" id="feeA" />%
+            </div>
+            <div style="background-color: rgba(37, 62, 224, 0.2)">
+                <label for="feeB">Fund B fee</label>
+                <input type="number" placeholder="1.6" id="feeB" />%
+            </div>
+            <div class="warnings">
+                <p>money lost through higher fees:</p>
+                <p><strong><span id="ansDiff" style="color:rgb(140, 0, 0);"></span></strong></p>
             </div>
         </div>
         <div id="canvasContainer">

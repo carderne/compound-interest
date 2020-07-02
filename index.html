@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0">
+        <title>Compount interest & fees</title>
+        <script src="vendor/Chart.bundle.min.js"></script>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="row">
+            <div class="column">
+                <h1>Compound interest & fees</h1>
+                <div style="padding-right:20px;">
+                    <p>Compound interest is hard to intuit. This applies to interest you owe, growth on investments, and also to fees. Hopefully this chart helps!</p>
+                    <p>Enter details of two separate investment options on the right to compare the expected returns far into the future.</p>
+                </div>
+                <div class="warnings">
+                    <p><strong>Comparison</strong></p>
+                    <p>final value A: <span id="ansA" class="green"></span></p>
+                    <p>final value B: <span id="ansB" class="green"></span></p>
+                    <p>money lost: <span id="ansDiff" class="red"></span></p>
+                </div>
+            </div>
+            <div class="column">
+                <h1 style="visibility: hidden;">Compound interest & fees</h1>
+                <div>
+                    <label for="age">Age</label>
+                    <input type="number" value="59" id="age" /> years
+                </div>
+
+                <div>
+                    <label for="lump">Lump sum</label>
+                    <input type="number" value="5" id="lump" /> million
+                </div>
+
+                <div>
+                    <label for="growth">Annual growth</label>
+                    <input type="number" value="7" id="growth" />%
+                </div>
+
+                <div>
+                    <label for="feeA">Fund A fee</label>
+                    <input type="number" value="0.1" id="feeA" />%
+                </div>
+
+                <div>
+                    <label for="feeB">Fund B fee</label>
+                    <input type="number" value="1.6" id="feeB" />%
+                </div>
+            </div>
+        </div>
+        <div id="canvasContainer">
+            <canvas id="canvas"></canvas>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>

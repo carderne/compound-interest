@@ -1,0 +1,76 @@
+html {
+    font-family: sans-serif;
+    color: #111111;
+}
+
+body {
+    margin: auto;
+    width: 90%;
+}
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.column {
+    flex: 50%;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        flex: 100%;
+    }
+}
+
+#canvasContainer {
+    margin-top: 20px;
+    position: relative;
+    height: 50vh;
+}
+
+.warnings {
+    background-color: rgb(220,220,220);
+    padding: 10px;
+    max-width: 500px;
+}
+
+.warnings p {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+input {
+    flex: 10%;
+    width: 10%;
+    height: 20px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+label {
+    flex: 40%;
+    width: 40%;
+    font-size: 16px;
+    float: left;
+    padding: 1px 10px;
+    text-align: center;
+}
+
+.green {
+    color: rgb(0,140,0);
+}
+
+.red {
+    color: rgb(140,0,0);
+}

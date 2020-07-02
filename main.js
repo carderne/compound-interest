@@ -3,6 +3,7 @@
 function $(id) { return document.getElementById(id); }
 
 const inAge = $("age");
+const inEndAge = $("endAge");
 const inLump = $("lump");
 const inGrowth = $("growth");
 const inFeeA = $("feeA");
@@ -12,7 +13,15 @@ const ansA = $("ansA");
 const ansB = $("ansB");
 const ansDiff = $("ansDiff");
 
+let age = 60;
+let endAge = 100;
+let lump = 5;
+let growth = 7;
+let feeA = 0.1;
+let feeB = 1.6;
+
 inAge.oninput = update;
+inEndAge.oninput = update;
 inLump.oninput = update;
 inGrowth.oninput = update;
 inFeeA.oninput = update;
@@ -39,15 +48,18 @@ function updateWarnings(data) {
   maxB = data.b[data.b.length - 1];
   ansA.innerHTML = Math.round(maxA) + " million";
   ansB.innerHTML = Math.round(maxB) + " million";
-  ansDiff.innerHTML = Math.round(maxA - maxB) + " million";
+  ansDiff.innerHTML = Math.abs(Math.round(maxA - maxB)) + " million";
 }
 
+
+
 function parseForms() {
-  let age = parseInt(inAge.value);
-  let lump = parseFloat(inLump.value);
-  let growth = (inGrowth.value) / 100;
-  let feeA = (inFeeA.value) / 100;
-  let feeB = (inFeeB.value) / 100;
+  if (inAge.value != "" && inAge.value != null) { age = parseFloat(inAge.value); }
+  if (inEndAge.value != "" && inEndAge.value != null) { endAge = parseFloat(inEndAge.value); }
+  if (inLump.value != "" && inLump.value != null) { lump = parseFloat(inLump.value); }
+  if (inGrowth.value != "" && inGrowth.value != null) { growth = parseFloat(inGrowth.value); }
+  if (inFeeA.value != "" && inFeeA.value != null) { feeA = parseFloat(inFeeA.value); }
+  if (inFeeB.value != "" && inFeeB.value != null) { feeB = parseFloat(inFeeB.value); }
 
   let lab = [];
   let lineA = [];
@@ -56,9 +68,9 @@ function parseForms() {
   let a = lump;
   let b = lump;
 
-  for (let i = age; i <= 100; i++) {
-    a = a * (1 + growth - feeA);
-    b = b * (1 + growth - feeB);
+  for (let i = age; i <= endAge; i++) {
+    a = a * (100 + growth - feeA) / 100;
+    b = b * (100 + growth - feeB) / 100;
     lab.push(i);
     lineA.push(a);
     lineB.push(b);
@@ -73,38 +85,38 @@ function parseForms() {
 
 
 function makeChart(data) {
-  let datasets = [
-    {
-      label: "a",
-      data: data.a,
-      borderColor: "rgba(57, 162, 174, 1)",
-      backgroundColor: "rgba(57, 162, 174, 0.2)",
-      borderCapStyle: "round",
-      borderWidth: 4,
-      pointBorderWidth: 0,
-      pointBackgroundColor: "rgba(0, 0, 0, 0)",
-      pointBorderColor: "rgba(0, 0, 0, 0)",
-    },
-    {
-      label: "b",
-      data: data.b,
-      borderColor: "rgba(87, 62, 174, 1)",
-      backgroundColor: "rgba(87, 62, 174, 0.2)",
-      borderCapStyle: "round",
-      borderWidth: 4,
-      pointBorderWidth: 0,
-      pointBackgroundColor: "rgba(0, 0, 0, 0)",
-      pointBorderColor: "rgba(0, 0, 0, 0)",
-    }
-  ];
+  let linedata = {
+    labels: data.lab,
+    datasets: [
+      {
+        label: "Fund A",
+        data: data.a,
+        borderColor: "rgba(57, 162, 174, 1)",
+        backgroundColor: "rgba(57, 162, 174, 0.2)",
+        borderCapStyle: "round",
+        borderWidth: 4,
+        pointBorderWidth: 0,
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        label: "Fund B",
+        data: data.b,
+        borderColor: "rgba(87, 62, 174, 1)",
+        backgroundColor: "rgba(87, 62, 174, 0.2)",
+        borderCapStyle: "round",
+        borderWidth: 4,
+        pointBorderWidth: 0,
+        pointBackgroundColor: "rgba(0, 0, 0, 0)",
+        pointBorderColor: "rgba(0, 0, 0, 0)",
+      }
+    ]
+  };
 
   if (chart == undefined) {
     config = {
       type: "line",
-      data: {
-        labels: data.lab,
-        datasets: datasets
-      },
+      data: linedata,
       options: {
         scales: {
           xAxes: [{
@@ -144,7 +156,7 @@ function makeChart(data) {
           }]
         },
         legend: {
-          display: false
+          display: true
         },
         showTooltips: false,
         tooltips: {
@@ -156,8 +168,7 @@ function makeChart(data) {
     }
     chart = new Chart(ctx, config);
   } else {
-    chart.data.datasets.pop();
-    chart.data.datasets = datasets;
+    chart.data = linedata;
     chart.update({duration: 0});
   }
 }

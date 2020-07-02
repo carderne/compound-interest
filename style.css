@@ -74,3 +74,12 @@ label {
 .red {
     color: rgb(140,0,0);
 }
+
+.hide-mobile {
+    visibility: hidden;
+}
+@media screen and (max-width: 800px) {
+    .hide-mobile {
+        display: none;
+    }
+}

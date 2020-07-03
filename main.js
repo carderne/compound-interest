@@ -48,7 +48,6 @@ function update() {
     }
   } catch (err) {
     // do nothing
-     console.log(err);
   }
 }
 

@@ -5,15 +5,19 @@ function $(id) { return document.getElementById(id); }
 const inAge = $("age");
 const inEndAge = $("endAge");
 const inLump = $("lump");
+const inCurr = $("curr");
+const inUnit = $("unit");
 const inGrowth = $("growth");
 const inFeeA = $("feeA");
 const inFeeB = $("feeB");
-const ctx = $("canvas").getContext('2d');
 const ansDiff = $("ansDiff");
+const ctx = $("canvas").getContext('2d');
 
 let age = 60;
 let endAge = 100;
 let lump = 5;
+let curr = "R";
+let unit = "million";
 let growth = 7;
 let feeA = 0.1;
 let feeB = 1.6;
@@ -21,6 +25,9 @@ let feeB = 1.6;
 inAge.oninput = update;
 inEndAge.oninput = update;
 inLump.oninput = update;
+inCurr.oninput = update;
+inUnit.oninput = update;
+inCurr.oninput = update;
 inGrowth.oninput = update;
 inFeeA.oninput = update;
 inFeeB.oninput = update;
@@ -34,21 +41,31 @@ function update() {
     if (newData != data) {
       data = newData;
       if (endAge > age) {
+        setUnit();
         makeChart(data);
         updateWarnings(data);
       }
     }
   } catch (err) {
     // do nothing
+     console.log(err);
   }
+}
+
+function setUnit() {
+  unit = inUnit.value;
+  if (unit == "only") { unit = ""; }
+
+  curr = inCurr.value;
 }
 
 function updateWarnings(data) {
   maxA = data.a[data.a.length - 1];
   maxB = data.b[data.b.length - 1];
-  ansDiff.innerHTML = Math.abs(maxA - maxB).toFixed(1) + " million";
+  let lost = Math.abs(maxA - maxB).toFixed(1);
+  let pclost = (100 * lost / Math.max(maxA, maxB)).toFixed(0);
+  ansDiff.innerHTML = curr + " " + lost + " " + unit  + " (" + pclost + "%)";
 }
-
 
 
 function parseForms() {
@@ -110,63 +127,67 @@ function makeChart(data) {
       }
     ]
   };
+  
+  let yLabel = "Value (" + unit + " " + curr + ")";
+  if (unit == "") { yLabel = "Value (" + curr + ")"; }
+
+  config = {
+    type: "line",
+    data: linedata,
+    options: {
+      scales: {
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Age',
+            fontSize: 20
+          },
+          gridLines: {
+            drawBorder: false,
+            lineWidth: 3,
+            zeroLineWidth: 3,
+            display: true,
+            drawOnChartArea: false,
+          },
+          ticks: {
+            fontSize: 14
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: yLabel,
+            fontSize: 20
+          },
+          gridLines: {
+            drawBorder: false,
+            lineWidth: 2,
+            zeroLineWidth: 2
+          },
+          ticks: {
+            fontSize: 16,
+            beginAtZero: true,
+            maxTicksLimit: 8,
+          }
+        }]
+      },
+      legend: {
+        display: true
+      },
+      showTooltips: false,
+      tooltips: {
+        enabled: false
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  }
 
   if (chart == undefined) {
-    config = {
-      type: "line",
-      data: linedata,
-      options: {
-        scales: {
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Age',
-              fontSize: 20
-            },
-            gridLines: {
-              drawBorder: false,
-              lineWidth: 3,
-              zeroLineWidth: 3,
-              display: true,
-              drawOnChartArea: false,
-            },
-            ticks: {
-              fontSize: 14
-            }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Investment value (millions)',
-              fontSize: 20
-            },
-            gridLines: {
-              drawBorder: false,
-              lineWidth: 2,
-              zeroLineWidth: 2
-            },
-            ticks: {
-              fontSize: 16,
-              beginAtZero: true,
-              maxTicksLimit: 8,
-              stepSize: 30,
-            }
-          }]
-        },
-        legend: {
-          display: true
-        },
-        showTooltips: false,
-        tooltips: {
-          enabled: false
-        },
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    }
     chart = new Chart(ctx, config);
   } else {
     chart.data = linedata;
+    chart.options.scales.yAxes[0].scaleLabel.labelString = yLabel;
     chart.update({duration: 0});
   }
 }

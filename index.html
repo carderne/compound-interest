@@ -15,7 +15,7 @@
         </div>
         <div class="forms">
             <div>
-                <label for="age">Age</label>
+                <label for="age">Age today</label>
                 <input type="number" placeholder="60" id="age" /> years
             </div>
             <div>
@@ -23,19 +23,28 @@
                 <input type="number" placeholder="100" id="endAge" /> years
             </div>
             <div>
-                <label for="lump">Lump sum</label>
-                <input type="number" placeholder="5" id="lump" /> million
+                <label for="lump">Invested</label>
+                <input type="number" placeholder="5" id="lump" />
+                <select id="unit" style="width:85px;">
+                    <option>only</option>
+                    <option>thousand</option>
+                    <option selected>million</option>
+                </select>
+                <select id="curr" style="width:75px;">
+                    <option value="R" selected>Rand</option>
+                    <option value="$">Dollars</option>
+                </select>
             </div>
             <div>
                 <label for="growth">Annual growth</label>
                 <input type="number" placeholder="7" id="growth" />%
             </div>
             <div style="background-color: rgba(57, 162, 174, 0.2)">
-                <label for="feeA">Fund A fee</label>
+                <label for="feeA">Fund A fees</label>
                 <input type="number" placeholder="0.1" id="feeA" />%
             </div>
             <div style="background-color: rgba(37, 62, 224, 0.2)">
-                <label for="feeB">Fund B fee</label>
+                <label for="feeB">Fund B fees</label>
                 <input type="number" placeholder="1.6" id="feeB" />%
             </div>
             <div class="warnings">

@@ -2,8 +2,7 @@
 
 function $(id) { return document.getElementById(id); }
 
-const inAge = $("age");
-const inEndAge = $("endAge");
+const inDur = $("dur");
 const inLump = $("lump");
 const inCurr = $("curr");
 const inUnit = $("unit");
@@ -13,8 +12,7 @@ const inFeeB = $("feeB");
 const ansDiff = $("ansDiff");
 const ctx = $("canvas").getContext('2d');
 
-let age = 60;
-let endAge = 100;
+let dur = 40;
 let lump = 5;
 let curr = "R";
 let unit = "million";
@@ -22,8 +20,7 @@ let growth = 7;
 let feeA = 0.1;
 let feeB = 1.6;
 
-inAge.oninput = update;
-inEndAge.oninput = update;
+inDur.oninput = update;
 inLump.oninput = update;
 inCurr.oninput = update;
 inUnit.oninput = update;
@@ -40,11 +37,9 @@ function update() {
     let newData = parseForms();
     if (newData != data) {
       data = newData;
-      if (endAge > age) {
-        setUnit();
-        makeChart(data);
-        updateWarnings(data);
-      }
+      setUnit();
+      makeChart(data);
+      updateWarnings(data);
     }
   } catch (err) {
     // do nothing
@@ -54,7 +49,6 @@ function update() {
 function setUnit() {
   unit = inUnit.value;
   if (unit == "only") { unit = ""; }
-
   curr = inCurr.value;
 }
 
@@ -68,8 +62,7 @@ function updateWarnings(data) {
 
 
 function parseForms() {
-  if (inAge.value != "" && inAge.value != null) { age = parseFloat(inAge.value); }
-  if (inEndAge.value != "" && inEndAge.value != null) { endAge = parseFloat(inEndAge.value); }
+  if (inDur.value != "" && inDur.value != null) { dur = parseFloat(inDur.value); }
   if (inLump.value != "" && inLump.value != null) { lump = parseFloat(inLump.value); }
   if (inGrowth.value != "" && inGrowth.value != null) { growth = parseFloat(inGrowth.value); }
   if (inFeeA.value != "" && inFeeA.value != null) { feeA = parseFloat(inFeeA.value); }
@@ -82,7 +75,7 @@ function parseForms() {
   let a = lump;
   let b = lump;
 
-  for (let i = age; i <= endAge; i++) {
+  for (let i = 0; i <= dur; i++) {
     a = a * (100 + growth - feeA) / 100;
     b = b * (100 + growth - feeB) / 100;
     lab.push(i);
@@ -126,7 +119,7 @@ function makeChart(data) {
       }
     ]
   };
-  
+
   let yLabel = "Value (" + unit + " " + curr + ")";
   if (unit == "") { yLabel = "Value (" + curr + ")"; }
 
@@ -138,7 +131,7 @@ function makeChart(data) {
         xAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Age',
+            labelString: 'Year',
             fontSize: 20
           },
           gridLines: {
